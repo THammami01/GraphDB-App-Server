@@ -443,13 +443,13 @@ def query_add_definitions(session, text_node_uuid: str, text_node_content: str):
 
     fixed_text = fix_text(text_node_content)
 
-    for voc in dictionnary:
-        if fix_text(voc) in fixed_text:
+    for ant in dictionnary:
+        if fix_text(ant) in fixed_text:
             query = """
                 MATCH(n) WHERE n.uuid = "%s"
                 CREATE(v: Annotation {name: "%s", abbreviation: "%s"})
-                CREATE(n)-[r:CONTAINS_VOC]->(v)
-            """ % (text_node_uuid, voc, dictionnary[voc])
+                CREATE(n)-[r:CONTAINS_ANT]->(v)
+            """ % (text_node_uuid, ant, dictionnary[ant])
             session.run(query)
 
 
